@@ -46,9 +46,9 @@ function Viewer() {
         </p>
             <p>
               <video controls id="video" preload="metadata" crossOrigin="*" autoPlay>
-                <source src={"http://msa-recap-file-storage.s3.amazonaws.com/" + project + ".webm"}
+                <source src={"https://msa-recap-file-storage.s3.amazonaws.com/" + project + ".webm"}
                   type="video/webm" />
-                <track label="English" kind="subtitles" srcLang="en" src={"http://msa-recap-file-storage.s3.amazonaws.com/" + project + ".vtt"} default>
+                <track label="English" kind="subtitles" srcLang="en" src={"https://msa-recap-file-storage.s3.amazonaws.com/" + project + ".vtt"} default>
                 </track>
 
               </video>
