@@ -39,7 +39,7 @@ function Viewer() {
         <div className="row align-items-center my-5">
           <div className="col-lg-9">
             <p>
-              {slug}
+              {/* {slug} */}
             </p>
             <p>
         <button id="transcript" onClick={createTranscript}>Create transcript</button>
