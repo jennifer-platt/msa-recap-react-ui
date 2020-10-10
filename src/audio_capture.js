@@ -44,7 +44,7 @@ function startAudioCapture() {
         mediaRecorder.ondataavailable = function (e) {
             chunks.push(e.data);
         };
-        mediaRecorder.start(100); // Default behavoiur wasn't working. Slices do.
+        mediaRecorder.start(100); // Default behaviour wasn't working. Slices do.
         console.log(mediaRecorder.state);
         console.log("recorder started");
     } catch (err) {
