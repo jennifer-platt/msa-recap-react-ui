@@ -18,7 +18,7 @@ async function uploadBlob(blob: Blob, name: string, exten: string, insights: boo
   if (insights) {
     for_insights = '&insights=-for-insights';
   }
-  let response = await fetch('api/uploadTest?name=' + name + '&exten=' + exten + for_insights,
+  let response = await fetch('api/msa-recap-blob-storage?name=' + name + '&exten=' + exten + for_insights,
     { method: 'POST', body: blob });
   return await response.text();
 }
