@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 // 
 function Viewer() {
 
-  let { slug } = useParams();
+  // let { slug } = useParams();
 
   let project = 'recording';
 
@@ -46,9 +46,9 @@ function Viewer() {
         </p>
             <p>
               <video controls id="video" preload="metadata" crossOrigin="*" autoPlay>
-                <source src={"https://msa-recap-file-storage.s3.amazonaws.com/" + project + ".webm"}
+                <source src={"https://msa-recap-storage.s3.amazonaws.com/" + project + ".webm"}
                   type="video/webm" />
-                <track label="English" kind="subtitles" srcLang="en" src={"https://msa-recap-file-storage.s3.amazonaws.com/" + project + ".vtt"} default>
+                <track label="English" kind="subtitles" srcLang="en" src={"https://msa-recap-storage.s3.amazonaws.com/" + project + ".vtt"} default>
                 </track>
 
               </video>
