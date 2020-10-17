@@ -5,9 +5,9 @@ import React from "react";
 // 
 function Viewer() {
 
-  // let { slug } = useParams();
+  let { slug } = useParams();
 
-  let project = 'recording';
+  let project = slug;
 
   let data = {
     "Insights": {
