@@ -39,7 +39,7 @@ function Viewer() {
         <div className="row align-items-center my-5">
           <div className="col-lg-9">
             <p>
-              {/* {slug} */}
+              {slug}
             </p>
             <p>
         <button id="transcript" onClick={createTranscript}>Create transcript</button>
@@ -48,8 +48,8 @@ function Viewer() {
               <video controls id="video" preload="metadata" crossOrigin="*" autoPlay>
                 <source src={"https://msarecap.blob.core.windows.net/" + project + ".webm"}
                   type="video/webm" />
-                <track label="English" kind="subtitles" srcLang="en" src={"https://msarecap.blob.core.windows.net/" + project + ".vtt"} default>
-                </track>
+                {/* <track label="English" kind="subtitles" srcLang="en" src={"https://msarecap.blob.core.windows.net/" + project + ".vtt"} default>
+                </track> */}
 
               </video>
             </p>
