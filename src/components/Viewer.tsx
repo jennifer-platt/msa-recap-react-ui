@@ -46,9 +46,9 @@ function Viewer() {
         </p>
             <p>
               <video controls id="video" preload="metadata" crossOrigin="*" autoPlay>
-                <source src={"https://msarecap.blob.core.windows.net/" + project + ".webm"}
+                <source src={"https://msarecap.blob.core.windows.net/recordings/" + project + ".webm"}
                   type="video/webm" />
-                {/* <track label="English" kind="subtitles" srcLang="en" src={"https://msarecap.blob.core.windows.net/" + project + ".vtt"} default>
+                {/* <track label="English" kind="subtitles" srcLang="en" src={"https://msarecap.blob.core.windows.net/recordings/" + project + ".vtt"} default>
                 </track> */}
 
               </video>
