@@ -15,4 +15,4 @@ def main(req: func.HttpRequest, jsonBlob: func.InputStream, outputBlob: func.Out
     ExtractTranscript.insights_to_vtt(insightsData,transcript)
     outputBlob.set(''.join(transcript))
 
-    return func.HttpResponse(f"Done",status_code=200)
+    return func.HttpResponse(f"Done", transcript)
