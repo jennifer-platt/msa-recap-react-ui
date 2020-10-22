@@ -1,9 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 
 function Feedback() {
-
-  let { slug } = useParams();
 
   return (
     <div className="about">
@@ -12,7 +9,7 @@ function Feedback() {
           <div className="col-lg-5">
             <h1 className="font-weight-light">Feedback</h1>
             <p>
-              Feedback for video {slug}
+              Feedback for video
             </p>
           </div>
         </div>
