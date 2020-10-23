@@ -86,8 +86,8 @@ function Home() {
     projectName().then((name) => {
       setProject(name);
     }).catch((err)=>{console.warn(err)});
-    enableMicrophone();
-    enableScreenCap();
+    // enableMicrophone();
+    // enableScreenCap();
     setDisabled({enable:true,start:false,pause:true,end:true,upload:true,download:true});
   }
 
