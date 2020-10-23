@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
-  enableMicrophone, disableMicrophone, startAudioCapture, stopAudioCapture,
+  disableMicrophone, startAudioCapture, stopAudioCapture,
   downloadAudioCapture, pauseAudioCapture, getAudioCaptureBlob
 } from "../audio_capture";
 import {
-  startScreenCapture, stopScreenCapture, enableScreenCap, disableScreenCap,
+  startScreenCapture, stopScreenCapture, disableScreenCap,
   downloadScreenCapture, pauseScreenCapture, getCaptureBlob
 } from "../capture";
 import { projectName, uploadBlob } from "../azure_upload";
