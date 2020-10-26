@@ -1,59 +1,43 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 
-function Navigation(props:any) {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  }),
+);
+
+function Navigation(props: any) {
+  const classes = useStyles();
+
   return (
-    <div className="navigation">
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div className="container">
-          <Link className="navbar-brand" to="/">
-            Recap - A microservices demo by Michael Saunby
-          </Link>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarResponsive"
-            aria-controls="navbarResponsive"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarResponsive">
-            <ul className="navbar-nav ml-auto">
-              <li
-                className={`nav-item  ${
-                  props.location.pathname === "/" ? "active" : ""
-                }`}
-              >
-                <Link className="nav-link" to="/">
-                  Home
-                  <span className="sr-only">(current)</span>
-                </Link>
-              </li>
-              <li
-                className={`nav-item  ${
-                  props.location.pathname === "/feedback" ? "active" : ""
-                }`}
-              >
-                <Link className="nav-link" to="/feedback">
-                  Feedback
-                </Link>
-              </li>
-              <li
-                className={`nav-item  ${
-                  props.location.pathname === "/viewer" ? "active" : ""
-                }`}
-              >
-                <Link className="nav-link" to="/viewer">
-                  Viewer
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu" className={classes.menuButton}>
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Recap
+    </Typography>
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import Button from '@material-ui/core/Button'
 
 // See https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video
 // 
@@ -34,15 +35,13 @@ function Viewer() {
   }
 
   return (
-    <div className="about">
+    <div className="viewer">
       <div className="container">
-        <div className="row align-items-center my-5">
-          <div className="col-lg-9">
+        <br/>
             <p>
               {slug}
             </p>
             <p>
-        <button id="transcript" onClick={createTranscript}>Create transcript</button>
         </p>
             <p>
               <video controls id="video" preload="metadata" crossOrigin="*" autoPlay>
@@ -53,10 +52,9 @@ function Viewer() {
 
               </video>
             </p>
+            <Button variant="contained" color="primary" id="transcript" onClick={createTranscript}>Create transcript</Button>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
 
