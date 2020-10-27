@@ -8,7 +8,7 @@ function Viewer() {
 
   let { slug } = useParams();
 
-  let project = 'MjE2NTYyMjQ0ODY5';
+  let project = 'Mjk4MjczMjExNDI1';
 
   // let data = {
   //   "Insights": {
