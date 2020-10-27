@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import Button from '@material-ui/core/Button'
+// import Button from '@material-ui/core/Button'
 
 // See https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video
 // 
@@ -10,29 +10,29 @@ function Viewer() {
 
   let project = 'MjE2NTYyMjQ0ODY5';
 
-  let data = {
-    "Insights": {
-      "FileName": project + ".ogg_insights.json"
-    },
-    "Transcript": {
-      "FileName": project + ".vtt"
-    }
-  };
+  // let data = {
+  //   "Insights": {
+  //     "FileName": project + ".ogg_insights.json"
+  //   },
+  //   "Transcript": {
+  //     "FileName": project + ".vtt"
+  //   }
+  // };
 
-  async function createTranscript(): Promise<string> {
-    console.info("fetching",JSON.stringify(data));
-    let response = await fetch('/api/HttpJsonTranscript', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    if (!response.ok) {
-      throw new Error('Unable to create transcript');
-    }
-    return await response.text();
-  }
+  // async function createTranscript(): Promise<string> {
+  //   console.info("fetching",JSON.stringify(data));
+  //   let response = await fetch('/api/HttpJsonTranscript', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(data),
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error('Unable to create transcript');
+  //   }
+  //   return await response.text();
+  // }
 
   return (
     <div className="viewer">
@@ -52,7 +52,7 @@ function Viewer() {
 
               </video>
             </p>
-            <Button variant="contained" color="primary" id="transcript" onClick={createTranscript}>Create transcript</Button>
+            {/* <Button variant="contained" color="primary" id="transcript" onClick={createTranscript}>Create transcript</Button> */}
           </div>
         </div>
   );
