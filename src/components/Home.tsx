@@ -233,7 +233,7 @@ export default class Home extends React.Component<{}, {
               </div>
               <br/>
               <div>
-              <Button variant="contained" color="primary" id="download" onClick={() => this.download()}>Download to Disk</Button>
+              <Button variant="contained" color="primary" id="download" onClick={() => this.download()}>Download to Disk</Button><span>     </span>
               <Button variant="contained" color="primary" id="upload">Upload to YouTube</Button>
             </div>
           </AccordionDetails>
