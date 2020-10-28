@@ -3,11 +3,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import {
-  disableMicrophone, startAudioCapture, stopAudioCapture,
+  enableMicrophone, disableMicrophone, startAudioCapture, stopAudioCapture,
   downloadAudioCapture, pauseAudioCapture, getAudioCaptureBlob
 } from "../audio_capture";
 import {
-  startScreenCapture, stopScreenCapture, disableScreenCap,
+  startScreenCapture, stopScreenCapture, enableScreenCap, disableScreenCap,
   downloadScreenCapture, pauseScreenCapture, getCaptureBlob
 } from "../capture";
 import { projectName, uploadBlob } from "../azure_upload";
@@ -86,8 +86,8 @@ function Home() {
     projectName().then((name) => {
       setProject(name);
     }).catch((err)=>{console.warn(err)});
-    // enableMicrophone();
-    // enableScreenCap();
+    enableMicrophone();
+    enableScreenCap();
     setDisabled({enable:true,start:false,pause:true,end:true,upload:true,download:true});
   }
 
