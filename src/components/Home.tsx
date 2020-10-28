@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TextField from '@material-ui/core/TextField';
@@ -13,6 +13,9 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { withStyles } from '@material-ui/core';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { blue } from '@material-ui/core/colors';
 
 import Viewer from "./Viewer";
 
@@ -33,8 +36,21 @@ const GlobalCss = withStyles({
     '.MuiAccordionDetails-root': {
       display: 'block'
     },
-  },
+  }
 })(() => null);
+
+const darkTheme = createMuiTheme({
+  palette: {
+    primary: {
+      // Purple and green play nicely together.
+      main: blue[900],
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: '#11cb5f',
+    }
+  }
+});
 
 export default class Home extends React.Component<{}, {
   recording: boolean,
@@ -117,19 +133,19 @@ export default class Home extends React.Component<{}, {
     }).catch((err) => { console.warn(err) });
     enableMicrophone();
     enableScreenCap();
-    this.setState({ recording: true, disabled: { enable: true, start: false, pause: true, end: true, complete:true, upload: true, download: true } });
+    this.setState({ recording: true, disabled: { enable: true, start: false, pause: true, end: true, complete: true, upload: true, download: true } });
   }
 
   startRecording() {
     startAudioCapture();
     startScreenCapture();
-    this.setState({ disabled: { enable: true, start: true, pause: false, end: false, complete:true, upload: true, download: true } });
+    this.setState({ disabled: { enable: true, start: true, pause: false, end: false, complete: true, upload: true, download: true } });
   }
 
   pauseRecording() {
     pauseAudioCapture();
     pauseScreenCapture();
-    this.setState({ disabled: { enable: true, start: false, pause: true, end: false, complete:true, upload: true, download: true } });
+    this.setState({ disabled: { enable: true, start: false, pause: true, end: false, complete: true, upload: true, download: true } });
   }
 
   endRecording() {
@@ -169,76 +185,76 @@ export default class Home extends React.Component<{}, {
 
   render() {
     return (
-      <div className="App">
-        <Accordion defaultExpanded={true} expanded={!this.state.recorded}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>1. Record</Typography>
-          </AccordionSummary>
-          <GlobalCss />
-          <AccordionDetails>
-            <div>
-            <Button variant="contained" color="primary" id="enableRecording" disabled={!this.state.disabled.complete} onClick={() => this.enableRecording()}>Enable Recording</Button>
-            </div>
-            <br />
-            <div>
-              <ButtonGroup variant="contained" color="primary">
-                <Button id="start" disabled={this.state.disabled.start} onClick={() => this.startRecording()}><Tooltip title="Start Recording" aria-label="Start Recording" arrow><FiberManualRecordIcon /></Tooltip></Button>
-                <Button id="pause" disabled={this.state.disabled.pause} onClick={() => this.pauseRecording()}><Tooltip title="Pause Recording" aria-label="Pause Recording" arrow><PauseIcon /></Tooltip></Button>
-                <Button id="endRecording" disabled={this.state.disabled.end} onClick={() => this.endRecording()}><Tooltip title="Stop Recording" aria-label="Stop Recording" arrow><StopIcon /></Tooltip></Button>
-              </ButtonGroup>
-            </div>
-            <br />
-            <Link to={"/viewer/" + this.state.project}>{this.state.project}</Link>
-            <br />
-            <div>
-              <Button variant="contained" color="primary" id="finishRecording" disabled={this.state.disabled.complete} onClick={() => this.completeRecording()}>Finished Recording</Button>
+      <ThemeProvider theme={darkTheme}>
+        <div className="App">
+          <Accordion defaultExpanded={true} expanded={!this.state.recorded}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Record</Typography>
+            </AccordionSummary>
+            <GlobalCss />
+            <AccordionDetails>
+              <div>
+                <Button variant="contained" color="primary" id="enableRecording" disabled={!this.state.disabled.complete} onClick={() => this.enableRecording()}>Enable Recording</Button>
               </div>
-          </AccordionDetails>
-        </Accordion>
-
-        <Accordion expanded={this.state.recorded && !this.state.edited}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>2. Edit</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Viewer />
-            <Button variant="contained" color="primary" id="completeEditing" onClick={() => this.completeEditing()}>Finished Editing</Button>
-          </AccordionDetails>
-        </Accordion>
-
-
-
-        {/* <video controls muted id="video" autoPlay></video>
-      <br></br> */}
-
-        <Accordion expanded={this.state.edited}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography>3. Upload</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <div>
-              <TextField label="Name your file" onChange={(evt) => { this.setState({ filename: evt.target.value }) }} />
+              <br />
+              <div>
+                <ButtonGroup variant="contained" color="primary">
+                  <Button id="start" disabled={this.state.disabled.start} onClick={() => this.startRecording()}><Tooltip title="Start Recording" aria-label="Start Recording" arrow><FiberManualRecordIcon /></Tooltip></Button>
+                  <Button id="pause" disabled={this.state.disabled.pause} onClick={() => this.pauseRecording()}><Tooltip title="Pause Recording" aria-label="Pause Recording" arrow><PauseIcon /></Tooltip></Button>
+                  <Button id="endRecording" disabled={this.state.disabled.end} onClick={() => this.endRecording()}><Tooltip title="Stop Recording" aria-label="Stop Recording" arrow><StopIcon /></Tooltip></Button>
+                </ButtonGroup>
+              </div>
+              <br />
+              {/* <Link to={"/viewer/" + this.state.project}>{}</Link> */}
+              <div>
+                <Button variant="contained" color="primary" id="finishRecording" disabled={this.state.disabled.complete} onClick={() => this.completeRecording()}>Finished Recording</Button>
               </div>
               <br/>
+            </AccordionDetails>
+          </Accordion>
+
+          <Accordion expanded={this.state.recorded && !this.state.edited}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel2a-content"
+              id="panel2a-header"
+            >
+              <Typography>Edit</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Viewer project={this.state.project} />
+              <Button variant="contained" color="primary" id="completeEditing" onClick={() => this.completeEditing()}>Finished Editing</Button>
+            </AccordionDetails>
+          </Accordion>
+
+          {/* <video controls muted id="video" autoPlay></video>
+      <br></br> */}
+
+          <Accordion expanded={this.state.edited}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel3a-content"
+              id="pane31a-header"
+            >
+              <Typography>Upload</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
               <div>
-              <Button variant="contained" color="primary" id="download" onClick={() => this.download()}>Download to Disk</Button><span>     </span>
-              <Button variant="contained" color="primary" id="upload">Upload to YouTube</Button>
-            </div>
-          </AccordionDetails>
-        </Accordion>
-      </div >
+                <TextField variant="outlined" required label="Name your recording" onChange={(evt) => { this.setState({ filename: evt.target.value }) }} />
+              </div>
+              <br />
+              <div>
+                <Button variant="contained" color="primary" id="download" onClick={() => this.download()}>Download to Disk</Button><span>     </span>
+                <Button variant="contained" color="primary" id="upload">Upload to YouTube</Button>
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        </div >
+      </ThemeProvider>
     );
   }
 }
