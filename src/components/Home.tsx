@@ -175,12 +175,15 @@ function Home() {
     });
     if (response.ok) {
       setExpanded('panel2');
-      setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: false });
+      setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: true });
+    }
+    else {
+      throw new Error('Recording unavailable');
     }
   }
   // Handles recording upload, getting blobs for playback and resetting Record section buttons 
   let completeRecording = () => {
-    setDisabled({ enable: false, start: true, pause: true, end: true, complete: false, upload: false, download: false, spinner: true });
+    setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: false });
     upload();
     new Promise(r => setTimeout(r, 2000)).then(() => {
       getRecording(project);
@@ -238,9 +241,7 @@ function Home() {
             <Typography variant="h6">Edit</Typography>
           </AccordionSummary>
           <AccordionDetails>
-          {disabled.spinner && <CircularProgress />}
-          <br />
-            {disabled.complete && <Viewer project={project} /> }
+            {disabled.spinner && <Viewer project={project} />}
             <Button variant="contained" color="primary" id="completeEditing" onClick={completeEditing}>Finished Editing</Button>
           </AccordionDetails>
         </Accordion>
