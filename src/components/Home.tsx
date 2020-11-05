@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
 function Home() {
   const classes = useStyles();
 
-  const [disabled, setDisabled] = useState({ enable: false, start: true, pause: true, end: true, complete: true, upload: true, download: true, spinner: false });
+  const [disabled, setDisabled] = useState({ enable: false, start: true, pause: true, end: true, complete: true, upload: true, download: true, spinner: false, viewer: false });
 
   const [filename, setFilename] = useState({ name: '', disabled: true });
 
