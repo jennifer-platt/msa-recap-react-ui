@@ -125,7 +125,6 @@ function Home() {
 
   let enableRecording = () => {
     projectName().then((name) => {
-      console.log(name);
       setProject(name);
     }).catch((err) => { console.warn(err) });
     enableMicrophone();
@@ -153,7 +152,7 @@ function Home() {
     setDisabled({ enable: true, start: true, pause: true, end: true, complete: false, upload: true, download: true, spinner: false });
   }
 
-  let upload = async () => {
+  let upload = () => {
 
     if (project) {
       console.info("Calling upload()");
@@ -182,7 +181,7 @@ function Home() {
   let completeRecording = () => {
     setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: true });
     upload();
-    new Promise(r => setTimeout(r, 8000)).then(() => {
+    new Promise(r => setTimeout(r, 5000)).then(() => {
     getRecording(project);
     setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: false });
     });

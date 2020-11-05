@@ -1,14 +1,13 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-// import Button from '@material-ui/core/Button'
 
 // See https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/Adding_captions_and_subtitles_to_HTML5_video
 // 
 function Viewer(props:any) {
 
-  let { slug } = useParams();
-
   let project = props.project;
+
+  /** TODO: uncomment the code below if reinstating Create Transcript button
+      in future iterations */
 
   // let data = {
   //   "Insights": {
@@ -37,22 +36,21 @@ function Viewer(props:any) {
   return (
     <div className="viewer">
       <div className="container">
-        <br/>
             <p>
-              {slug}
             </p>
             <p>
+        {/* <button id="transcript" onClick={createTranscript}>Create transcript</button> */}
         </p>
             <p>
               <video controls id="video" preload="metadata" crossOrigin="*" autoPlay>
+                {/* TODO: Update src x2 below to match chosen storage option */}
                 <source src={"https://msarecap.blob.core.windows.net/recordings/" + project + ".webm"}
                   type="video/webm" />
-                {/* <track label="English" kind="subtitles" srcLang="en" src={"https://msarecap.blob.core.windows.net/recordings/" + project + ".vtt"} default>
-                </track> */}
+                <track label="English" kind="subtitles" srcLang="en" src={"https://msarecap.blob.core.windows.net/recordings/" + project + ".vtt"} default>
+                </track>
 
               </video>
             </p>
-            {/* <Button variant="contained" color="primary" id="transcript" onClick={createTranscript}>Create transcript</Button> */}
           </div>
         </div>
   );
