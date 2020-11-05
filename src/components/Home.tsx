@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, CircularProgress } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TextField from '@material-ui/core/TextField';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
