@@ -178,7 +178,8 @@ function Home() {
   }
   // Handles recording upload, getting blobs for playback and resetting Record section buttons 
   let completeRecording = () => {
-    upload().then(() => {
+    upload();
+    new Promise(r => setTimeout(r, 2000)).then(() => {
     getRecording(project);
     setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false });
     });
