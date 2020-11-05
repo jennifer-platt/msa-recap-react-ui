@@ -141,7 +141,7 @@ function Home() {
   let pauseRecording = () => {
     pauseAudioCapture();
     pauseScreenCapture();
-    setDisabled({ enable: true, start: false, pause: true, end: false, complete: true, upload: true, download: true, spinner: false});
+    setDisabled({ enable: true, start: false, pause: true, end: false, complete: true, upload: true, download: true, spinner: false });
   }
 
   let endRecording = () => {
@@ -152,7 +152,7 @@ function Home() {
     setDisabled({ enable: true, start: true, pause: true, end: true, complete: false, upload: true, download: true, spinner: false });
   }
 
-  let upload = () => {
+  let upload = async () => {
 
     if (project) {
       console.info("Calling upload()");
@@ -175,15 +175,15 @@ function Home() {
     });
     if (response.ok) {
       setExpanded('panel2');
+      setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: false });
     }
   }
   // Handles recording upload, getting blobs for playback and resetting Record section buttons 
   let completeRecording = () => {
-    setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: true });
+    setDisabled({ enable: false, start: true, pause: true, end: true, complete: false, upload: false, download: false, spinner: true });
     upload();
-    new Promise(r => setTimeout(r, 5000)).then(() => {
-    getRecording(project);
-    setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: false });
+    new Promise(r => setTimeout(r, 2000)).then(() => {
+      getRecording(project);
     });
   }
 
@@ -226,8 +226,6 @@ function Home() {
               <Button variant="contained" color="primary" id="finishRecording" disabled={disabled.complete} onClick={completeRecording}>Finished Recording</Button>
             </div>
             <br />
-            <div>{disabled.spinner && <CircularProgress />}</div>
-            <br />
           </AccordionDetails>
         </Accordion>
 
@@ -240,7 +238,9 @@ function Home() {
             <Typography variant="h6">Edit</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Viewer project={project} />
+          {disabled.spinner && <CircularProgress />}
+          <br />
+            {disabled.complete && <Viewer project={project} /> }
             <Button variant="contained" color="primary" id="completeEditing" onClick={completeEditing}>Finished Editing</Button>
           </AccordionDetails>
         </Accordion>
@@ -255,7 +255,7 @@ function Home() {
           </AccordionSummary>
           <AccordionDetails>
             <div>
-              <TextField variant="outlined" required label="Name your recording" onChange={(evt) => { setFilename({name: evt.target.value, disabled: false}) }} />
+              <TextField variant="outlined" required label="Name your recording" onChange={(evt) => { setFilename({ name: evt.target.value, disabled: false }) }} />
             </div>
             <br />
             <div>
