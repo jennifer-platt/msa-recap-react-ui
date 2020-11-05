@@ -46,8 +46,8 @@ function Viewer(props:any) {
                 {/* TODO: Update src x2 below to match chosen storage option */}
                 <source src={"https://msarecap.blob.core.windows.net/recordings/" + project + ".webm"}
                   type="video/webm" />
-                <track label="English" kind="subtitles" srcLang="en" src={"https://msarecap.blob.core.windows.net/recordings/" + project + ".vtt"} default>
-                </track>
+                {/* <track label="English" kind="subtitles" srcLang="en" src={"https://msarecap.blob.core.windows.net/recordings/" + project + ".vtt"} default>
+                </track> */}
 
               </video>
             </p>

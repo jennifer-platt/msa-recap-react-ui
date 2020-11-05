@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import TextField from '@material-ui/core/TextField';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
@@ -9,6 +9,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { withStyles } from '@material-ui/core';
@@ -128,19 +129,19 @@ function Home() {
     }).catch((err) => { console.warn(err) });
     enableMicrophone();
     enableScreenCap();
-    setDisabled({ enable: true, start: false, pause: true, end: true, complete: true, upload: true, download: true, spinner: false });
+    setDisabled({ enable: true, start: false, pause: true, end: true, complete: true, upload: true, download: true, spinner: false, viewer: false });
   }
 
   let startRecording = () => {
     startAudioCapture();
     startScreenCapture();
-    setDisabled({ enable: true, start: true, pause: false, end: false, complete: true, upload: true, download: true, spinner: false });
+    setDisabled({ enable: true, start: true, pause: false, end: false, complete: true, upload: true, download: true, spinner: false, viewer: false });
   }
 
   let pauseRecording = () => {
     pauseAudioCapture();
     pauseScreenCapture();
-    setDisabled({ enable: true, start: false, pause: true, end: false, complete: true, upload: true, download: true, spinner: false });
+    setDisabled({ enable: true, start: false, pause: true, end: false, complete: true, upload: true, download: true, spinner: false, viewer: false });
   }
 
   let endRecording = () => {
@@ -148,7 +149,7 @@ function Home() {
     stopScreenCapture();
     disableMicrophone();
     disableScreenCap();
-    setDisabled({ enable: true, start: true, pause: true, end: true, complete: false, upload: true, download: true, spinner: false });
+    setDisabled({ enable: true, start: true, pause: true, end: true, complete: false, upload: true, download: true, spinner: false, viewer: false });
   }
 
   let upload = async () => {
@@ -174,7 +175,7 @@ function Home() {
     });
     if (response.ok) {
       setExpanded('panel2');
-      setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: true });
+      setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: false, viewer: true });
     }
     else {
       throw new Error('Recording unavailable');
@@ -182,7 +183,7 @@ function Home() {
   }
   // Handles recording upload, getting blobs for playback and resetting Record section buttons 
   let completeRecording = () => {
-    setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: false });
+    setDisabled({ enable: false, start: true, pause: true, end: true, complete: true, upload: false, download: false, spinner: true, viewer: false });
     upload();
     new Promise(r => setTimeout(r, 2000)).then(() => {
       getRecording(project);
@@ -228,6 +229,7 @@ function Home() {
               <Button variant="contained" color="primary" id="finishRecording" disabled={disabled.complete} onClick={completeRecording}>Finished Recording</Button>
             </div>
             <br />
+            {disabled.spinner && <CircularProgress />}
           </AccordionDetails>
         </Accordion>
 
@@ -240,7 +242,7 @@ function Home() {
             <Typography variant="h6">Edit</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {disabled.spinner && <Viewer project={project} />}
+            {disabled.viewer && <Viewer project={project} />}
             <Button variant="contained" color="primary" id="completeEditing" onClick={completeEditing}>Finished Editing</Button>
           </AccordionDetails>
         </Accordion>
