@@ -17,12 +17,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Install Packages
-        - run: npm install
-      - name: Build
-        - run: yarn build
-      - name: Run Tests
-        - run: yarn test
+      - run: npm install
+      - run: yarn build
+      - run: yarn test
 
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
