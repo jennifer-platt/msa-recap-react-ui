@@ -3,11 +3,22 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - master
+      - development
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - master
+      - development
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn
+      - run: yarn test
 
 jobs:
   build_and_deploy_job:
