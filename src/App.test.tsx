@@ -2,8 +2,20 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders link to Home page', () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/Hello/i);
-  expect(linkElement).toBeInTheDocument();
+  const homeLink = getByText('Home');
+  expect(homeLink).toBeInTheDocument();
+});
+
+test('renders link to About page', () => {
+  const { getByText } = render(<App />);
+  const aboutLink = getByText('About');
+  expect(aboutLink).toBeInTheDocument();
+});
+
+test('renders link to Viewer page', () => {
+  const { getByText } = render(<App />);
+  const viewerLink = getByText('Viewer');
+  expect(viewerLink).toBeInTheDocument();
 });
