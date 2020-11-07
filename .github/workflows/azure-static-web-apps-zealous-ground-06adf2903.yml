@@ -2,10 +2,6 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
-  pull_request:
-    types: [opened, synchronize, reopened, closed]
-    branches:
-      - master
 
 jobs:
   test:
@@ -20,10 +16,19 @@ jobs:
       - run: yarn install
       - run: yarn test
 
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - master
+
+jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     name: Build and Deploy
-    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
