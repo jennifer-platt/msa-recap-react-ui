@@ -2,7 +2,7 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
-    branches:
+    branches-ignore:
       - master
   pull_request:
     types: [opened, synchronize, reopened, closed]
@@ -10,10 +10,22 @@ on:
       - master
 
 jobs:
-  build_and_deploy_job:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+  test:
+    if: github.event_name == 'push'
+    name: Unit Tests
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: yarn
+      - run: yarn test
+
+  build_and_deploy_job:
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    name: Build and Deploy
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -31,3 +43,15 @@ jobs:
           api_location: "api" # Api source code path - optional
           app_artifact_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v0.0.1-preview
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_ZEALOUS_GROUND_06ADF2903 }}
+          action: "close"
