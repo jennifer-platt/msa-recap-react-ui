@@ -2,6 +2,8 @@ name: Azure Static Web Apps CI/CD
 
 on:
   push:
+    branches-ignore:
+      - master
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
@@ -9,7 +11,7 @@ on:
 
 jobs:
   test:
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'push'
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
